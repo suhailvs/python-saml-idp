@@ -15,25 +15,27 @@ else:
     xmlsec_path = '/usr/local/bin/xmlsec1'
 
 # Make sure the same port number appear in service_conf.py
-BASE = "http://localhost:8087"
-
+# BASE = "https://localhost"
+BASE = "http://localhost:8000"
+# BASE = "http://localhost:8087"
 CONFIG = {
-    "entityid": "%s/%ssp.xml" % (BASE, ""),
+    "entityid": f"{BASE}/djangosaml/acs/",
     'entity_category': [COC],
     "description": "Example SP",
     "service": {
         "sp": {
             "want_response_signed": False,
-            "authn_requests_signed": True,
-            "logout_requests_signed": True,
+            "authn_requests_signed": False,
+            # "logout_requests_signed": True,
             "endpoints": {
                 "assertion_consumer_service": [
-                    ("%s/acs/post" % BASE, BINDING_HTTP_POST)
+                    (f"{BASE}/djangosaml/acs/", BINDING_HTTP_POST)
+                    # (f"{BASE}/acs/post", BINDING_HTTP_POST)
                 ],
-                "single_logout_service": [
-                    ("%s/slo/redirect" % BASE, BINDING_HTTP_REDIRECT),
-                    ("%s/slo/post" % BASE, BINDING_HTTP_POST),
-                ],
+                # "single_logout_service": [
+                #     ("%s/slo/redirect" % BASE, BINDING_HTTP_REDIRECT),
+                #     ("%s/slo/post" % BASE, BINDING_HTTP_POST),
+                # ],
             }
         },
     },

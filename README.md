@@ -2,44 +2,17 @@
 
 > To run `make_metadata.py` you need `python 3.7` won't work on python 3.10
 
-This is a very simple setup just to check that all your gear are in order.
+```
+cd sp-wsgi/
+make_metadata.py sp_conf > sp.xml
 
-The setup consists of one IdP and one SP, in idp2/ and sp-wsgi/ respectively.
+cd ../idp2
+./idp.py idp_conf 
+```
 
-To run the setup do:
+```
+cd djangosample/
+./manage.py runserver
+```
 
-  ./all.sh start
-
-and then use your favourite webbrowser to look at "http://localhost:8087/"
-
-To shut it down do:
-
-  ./all.sh stop
-
-The IdP authenticates users using a dictionary built in to idp2/idp.py;
-look for the dictionary called PASSWD inside that file.
-
-Other metadata about the accounts (names, email addresses, etc) are
-stored in idp2/idp_user.py.  (Note, not all accounts have all such data
-defined.)
-
-The username:password pairs in PASSWD:
-
-daev0001:qwerty
-testuser:qwerty
-roland:dianakra
-babs:howes
-upper:crust
-
-The SP doesn't do anything but show you the information that the IdP sent.
-
-Note, the listeners are all configured to bind to localhost (127.0.0.1) only.
-If you want to be able to connect to them externally, grep "HOST = '127.0.0.1'"
-example/*/*.py and replace 127.0.0.1 with 0.0.0.0 or a specific IP.
-
-To make it easy, for me :-), both the IdP and the SP uses the same keys.
-To generate new keys, run create_key.sh and follow its instructions.
-
-There are alternate IdP and SP configs in idp2_repoze/ and sp-repoze/ that
-are still in flux; do not use them unless you know what you are doing.
-
+visit: http://localhost:8000/djangosaml/login/

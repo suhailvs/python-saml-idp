@@ -1,3 +1,4 @@
 mako
 cherrypy>14.0.
 pysaml2
+djangosaml==1.0.5
